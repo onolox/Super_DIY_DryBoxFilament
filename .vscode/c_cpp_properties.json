@@ -323,14 +323,14 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=60117",
+                "PLATFORMIO=60118",
                 "ARDUINO_YD_RP2040",
                 "ARDUINO_ARCH_RP2040",
                 "USBD_MAX_POWER_MA=500",
                 "DEBUG_RP2040_PORT=Serial1",
                 "ARDUINO=10810",
                 "ARDUINO_ARCH_RP2040",
-                "F_CPU=133000000L",
+                "F_CPU=250000000L",
                 "BOARD_NAME=\"vccgnd_yd_rp2040\"",
                 "ARM_MATH_CM0_FAMILY",
                 "ARM_MATH_CM0_PLUS",

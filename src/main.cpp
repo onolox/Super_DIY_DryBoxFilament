@@ -1,8 +1,8 @@
-#include "main.hpp"
+#include "main.h"
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
-  // pinMode(pinBeeper, OUTPUT);
+  pinMode(pinBeeper, OUTPUT);
 
   SDFSConfig c2;
   c2.setCSPin(SD_CS_PIN);
@@ -17,19 +17,31 @@ void setup() {
   attachInterrupt(inputDimmer, zero_cross_detect, RISING);  // Attach an Interupt to Pin 2 (interupt 0) for Zero Cross Detection
   ITimer1.attachInterruptInterval(freqStep, dim_check);
 
-  SPI.begin(true);
-  SPI1.begin(true);
   tft.begin();
-  tft.setRotation(1);
+  tft.setRotation(0);
+  tft.initDMA();
   // calibrate_touch();
   tft.setTouch(calData);
-  tft.setTextSize(3);
 
-  tft.fillScreen(TFT_WHITE);
+  lv_init();
+  lv_disp_draw_buf_init(&draw_buf, buf1, buf2, screenWidth * screenHeight / 6);
 
-  tft.fillCircle(25, 25, 25, TFT_BLUE);
-  tft.fillRect(51, 0, 49, 49, TFT_BLUE);
-  tft.fillTriangle(124, 0, 101, 50, 150, 50, TFT_BLUE);
+  /* Initialize the display */
+  static lv_disp_drv_t disp_drv;
+  lv_disp_drv_init(&disp_drv);
+  /* Change the following line to your display resolution */
+  disp_drv.hor_res = screenWidth;
+  disp_drv.ver_res = screenHeight;
+  disp_drv.flush_cb = my_disp_flush;
+  disp_drv.draw_buf = &draw_buf;
+  lv_disp_drv_register(&disp_drv);
+
+  /* Initialize the (dummy) input device driver */
+  static lv_indev_drv_t indev_drv;
+  lv_indev_drv_init(&indev_drv);
+  indev_drv.type = LV_INDEV_TYPE_POINTER;
+  indev_drv.read_cb = my_touchpad_read;
+  lv_indev_drv_register(&indev_drv);
 
   //   if (!SDFS.begin()) {  // Monta
   //     Serial1.println(F("SD failed!"));
@@ -41,7 +53,7 @@ void setup() {
   //     SDFS.end();
   //   }
 
-  pinMode(pinBeeper, INPUT);
+  ui_init();
 }
 
 long tempoPassado = 0;
@@ -51,9 +63,9 @@ char tempoRestante[5] = " :  ";
 
 void loop() {
   unsigned long temPassado;
-  short potLida = 100;
+  int potLida = 100;
   potenciaAtual = map(potLida, 4, 1023, 0, 100);
-  short potCompensada = arrayCompensacao[potenciaAtual];
+  int potCompensada = arrayCompensacao[potenciaAtual];
   dim = map(potCompensada, 0, 100, 128, 0);
 
   // verificarSeguranca();
@@ -70,8 +82,8 @@ void loop() {
     }
 
     temPassado = millis() - tempoInicial;
-    short horasFaltantes = ((tempoMaterialAtual * 3600) - (temPassado / 1000)) / 3600;
-    short minutosFaltantes = ((((tempoMaterialAtual * 3600) - (temPassado / 1000)) / 60) % 60);
+    int horasFaltantes = ((tempoMaterialAtual * 3600) - (temPassado / 1000)) / 3600;
+    int minutosFaltantes = ((((tempoMaterialAtual * 3600) - (temPassado / 1000)) / 60) % 60);
     char buff1[1];
     itoa(horasFaltantes, buff1, 10);
     tempoRestante[0] = buff1[0];
@@ -88,6 +100,7 @@ void loop() {
     Serial1.print(buffer);
     Serial1.println(tempArredFormatada);
   }
+  lv_timer_handler();
 }
 
 void setup1() {}
@@ -108,25 +121,38 @@ void verificarDHT22() {
   }
 }
 
-void alterarTipoMaterial(short qtd) {
-  tipoMaterialAtual += qtd;
+void alterarTipoMaterial() {
+  int tamanhoArray = sizeof(materiais) / sizeof(materiais[1]) - 1;
+  tipoMaterialAtual++;
+
   if (tipoMaterialAtual < 0) {
-    tipoMaterialAtual = 5;
+    tipoMaterialAtual = tamanhoArray;
   }
-  else if (tipoMaterialAtual > 5) {
+  else if (tipoMaterialAtual > tamanhoArray) {
     tipoMaterialAtual = 0;
   }
 
   strcpy(nomeMaterialAtual, materiais[tipoMaterialAtual]);
   temperaturaMaterialAtual = temperaturaMateriais[tipoMaterialAtual];
   tempoMaterialAtual = tempoMateriais[tipoMaterialAtual];
+
+  lv_label_set_text(ui_labelTextoBotaoFilamento, nomeMaterialAtual);
+  char temp[7];
+  lv_label_set_text(ui_labelTime, itoa(tempoMaterialAtual, temp, 10));
+  lv_label_set_text(ui_labelTemp, itoa(temperaturaMaterialAtual, temp, 10));
 }
 
+// ---------------------------------------------------------------------------------------------------- Eventos Tela
+void btnMudarFilamentoClick(lv_event_t *e) { alterarTipoMaterial(); }
+
+void btnVoltarTelainicialClick(lv_event_t *e) { estado = 0; }
+
+//=========================================================================== Outros
 /*
  * Poll for a measurement, keeping the state machine alive.  Returns
  * true if a measurement is available.
  */
-static bool measure_environment(float* temperature, float* humidity) {
+static bool measure_environment(float *temperature, float *humidity) {
   /* Measure once every 5 seconds. */
   if (millis() - measurement_timestamp > 3000ul) {
     if (dht_sensor.measure(temperature, humidity)) {
@@ -145,7 +171,7 @@ void zero_cross_detect() {
 }
 
 // Turn on the TRIAC at the appropriate time
-bool dim_check(struct repeating_timer* t) {
+bool dim_check(struct repeating_timer *t) {
   if (zero_cross == true) {
     if (i >= dim) {
       digitalWrite(outputDimmer, HIGH);  // turn on light
@@ -174,8 +200,44 @@ bool dim_check(struct repeating_timer* t) {
     }
 }*/
 
+//_______________________
+/* display flash */
+void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p) {
+  uint32_t w = (area->x2 - area->x1 + 1);
+  uint32_t h = (area->y2 - area->y1 + 1);
+
+  tft.startWrite();
+  // tft.setAddrWindow(area->x1, area->y1, w, h);
+  // tft.pushColors((uint16_t *)&color_p->full, w * h, true);
+  tft.pushImageDMA(area->x1, area->y1, w, h, (uint16_t *)&color_p->full);  // Use DMA for pushing colors
+  tft.endWrite();
+
+  lv_disp_flush_ready(disp);
+}
+
+/*touch read*/
+void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data) {
+  bool touched = tft.getTouch(&touchX, &touchY, 600);
+  if (!touched) {
+    data->state = LV_INDEV_STATE_REL;
+  }
+  else {
+    data->state = LV_INDEV_STATE_PR;
+
+    /*set location*/
+    data->point.x = touchX;
+    data->point.y = touchY;
+
+    Serial1.print("Data x ");
+    Serial1.println(touchX);
+
+    Serial1.print("Data y ");
+    Serial1.println(touchY);
+  }
+}
+
 void playAlert() {
-  for (short x = 0; x < 10; x++) {
+  for (int x = 0; x < 10; x++) {
     tone(pinBeeper, 500, 1000);  // D4
     delay(300);
     tone(pinBeeper, 600, 1000);  // D4
@@ -184,7 +246,7 @@ void playAlert() {
 }
 
 void playEndSong() {
-  for (short x = 0; x < 10; x++) {
+  for (int x = 0; x < 10; x++) {
     tone(pinBeeper, 294, 125);  // D4
     delay(125);
     tone(pinBeeper, 294, 125);  // D4
