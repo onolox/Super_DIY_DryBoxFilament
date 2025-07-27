@@ -46,8 +46,11 @@ extern lv_obj_t* ui_Image3;
 extern lv_obj_t* ui_PanelUmidade;
 extern lv_obj_t* ui_Image5;
 extern lv_obj_t* ui_labelUmidade;
+extern lv_obj_t* ui_labelMaterial;
 // CUSTOM VARIABLES
 extern lv_obj_t* uic_TelaRodando;
+extern lv_chart_series_t* ui_grafico_series_1;
+extern lv_chart_series_t* ui_grafico_series_2;
 
 // SCREEN: ui_TelaEncerrar
 void ui_TelaEncerrar_screen_init(void);
@@ -61,6 +64,16 @@ extern lv_obj_t* ui_Button2;
 extern lv_obj_t* ui_Label2;
 // CUSTOM VARIABLES
 extern lv_obj_t* uic_TelaEncerrar;
+
+// SCREEN: ui_TelaOverheating
+void ui_TelaOverheating_screen_init(void);
+extern lv_obj_t* ui_TelaOverheating;
+extern lv_obj_t* ui_Label1;
+extern lv_obj_t* ui_Label2;
+void ui_event_ButtonOverheating(lv_event_t* e);
+extern lv_obj_t* ui_ButtonOverheating;
+// CUSTOM VARIABLES
+extern lv_obj_t* uic_TelaOverheating;
 
 // EVENTS
 

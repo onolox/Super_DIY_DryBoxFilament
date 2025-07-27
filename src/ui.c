@@ -41,8 +41,11 @@ lv_obj_t* ui_Image3;
 lv_obj_t* ui_PanelUmidade;
 lv_obj_t* ui_Image5;
 lv_obj_t* ui_labelUmidade;
+lv_obj_t* ui_labelMaterial;
 // CUSTOM VARIABLES
 lv_obj_t* uic_TelaRodando;
+lv_chart_series_t* ui_grafico_series_1;
+lv_chart_series_t* ui_grafico_series_2;
 
 // SCREEN: ui_TelaEncerrar
 void ui_TelaEncerrar_screen_init(void);
@@ -57,6 +60,16 @@ lv_obj_t* ui_Label2;
 // CUSTOM VARIABLES
 lv_obj_t* uic_TelaEncerrar;
 
+// SCREEN: ui_TelaOverheating
+void ui_TelaOverheating_screen_init(void);
+lv_obj_t* ui_TelaOverheating;
+lv_obj_t* ui_Label1;
+lv_obj_t* ui_Label2;
+void ui_event_ButtonOverheating(lv_event_t* e);
+lv_obj_t* ui_ButtonOverheating;
+// CUSTOM VARIABLES
+lv_obj_t* uic_TelaOverheating;
+
 // EVENTS
 lv_obj_t* ui____initial_actions0;
 
@@ -67,7 +80,7 @@ lv_obj_t* ui____initial_actions0;
 #error "LV_COLOR_DEPTH should be 16bit to match SquareLine Studio's settings"
 #endif
 #if LV_COLOR_16_SWAP != 1
-#error "LV_COLOR_16_SWAP should be 0 to match SquareLine Studio's settings"
+#error "LV_COLOR_16_SWAP should be 1 to match SquareLine Studio's settings"
 #endif
 
 ///////////////////// ANIMATIONS ////////////////////
@@ -85,7 +98,7 @@ void ui_event_bStart(lv_event_t* e) {
   lv_event_code_t event_code = lv_event_get_code(e);
 
   if (event_code == LV_EVENT_CLICKED) {
-    _ui_screen_change(&ui_TelaRodando, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0, &ui_TelaRodando_screen_init);
+        btnIniciarClick();
   }
 }
 
@@ -94,6 +107,7 @@ void ui_event_grafico(lv_event_t* e) {
 
   if (event_code == LV_EVENT_CLICKED) {
     _ui_screen_change(&ui_TelaEncerrar, LV_SCR_LOAD_ANIM_OUT_TOP, 500, 0, &ui_TelaEncerrar_screen_init);
+    clicarGrafico();
   }
 }
 
@@ -101,8 +115,7 @@ void ui_event_Button1(lv_event_t* e) {
   lv_event_code_t event_code = lv_event_get_code(e);
 
   if (event_code == LV_EVENT_CLICKED) {
-    _ui_screen_change(&ui_TelaInicial, LV_SCR_LOAD_ANIM_NONE, 500, 0, &ui_TelaInicial_screen_init);
-    btnVoltarTelainicialClick(e);
+        btnVoltarTelainicialClick();
   }
 }
 
@@ -111,6 +124,16 @@ void ui_event_Button2(lv_event_t* e) {
 
   if (event_code == LV_EVENT_CLICKED) {
     _ui_screen_change(&ui_TelaRodando, LV_SCR_LOAD_ANIM_NONE, 500, 0, &ui_TelaRodando_screen_init);
+    playButtonTone();
+  }
+}
+
+void ui_event_ButtonOverheating(lv_event_t* e) {
+  lv_event_code_t event_code = lv_event_get_code(e);
+
+  if (event_code == LV_EVENT_CLICKED) {
+    btnEncerrarAlertaClick(e);
+    _ui_screen_change(&ui_TelaInicial, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_TelaOverheating_screen_init);
   }
 }
 
@@ -123,6 +146,7 @@ void ui_init(void) {
   ui_TelaInicial_screen_init();
   ui_TelaRodando_screen_init();
   ui_TelaEncerrar_screen_init();
+  ui_TelaOverheating_screen_init();
   ui____initial_actions0 = lv_obj_create(NULL);
   lv_disp_load_scr(ui_TelaInicial);
 }

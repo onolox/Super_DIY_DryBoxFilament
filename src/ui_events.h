@@ -11,7 +11,11 @@ extern "C" {
 #endif
 
 void btnMudarFilamentoClick(lv_event_t* e);
-void btnVoltarTelainicialClick(lv_event_t* e);
+void btnVoltarTelainicialClick();
+void btnEncerrarAlertaClick(lv_event_t* e);
+void btnIniciarClick();
+void clicarGrafico();
+void playButtonTone();
 
 #ifdef __cplusplus
 } /*extern "C"*/

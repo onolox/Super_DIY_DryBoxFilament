@@ -5,8 +5,17 @@
 #include <SPI.h>
 #include <TFT_eSPI.h>
 
-#include "DHT_Async.h"
+#include "QuickPID.h"
+#include "dhtnew.h"
 #include "ui.h"
+
+#define DEBUG MAIN_DEBUG
+#define debug(x) Serial1.print(x)  // Debug substitution
+#define debugLn(x) Serial1.println(x)
+#if DEBUG == 0
+#define debug(x)
+#define debugLn(x)
+#endif
 
 // _TIMERINTERRUPT_LOGLEVEL_ from 0 to 4
 // Don't define _TIMERINTERRUPT_LOGLEVEL_ > 0. Only for special ISR debugging only. Can hang the system.
@@ -25,19 +34,20 @@ void verificarSeguranca();
 void secando();
 void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data);
 void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
+void alterarTipoMaterial();
+void atualizarDadosDisplay();
+void formatarTempoRestante();
+void logCartao();
+void logSerial();
+void playButtonTone();
+void playStartSong();
+void clicarGrafico();
+void eventoBotaoCartao(lv_event_t *e);
 
-#define pinDHT22 6
-#define pinBeeper 9
-#define pin
-
-// #define SDCARD_SCK_PIN 14
-// #define SDCARD_MISO_PIN 15
-// #define SDCARD_MOSI_PIN 12
+volatile int pinBeeper = 9;
 #define SD_CS_PIN 13
-
 int Potread;
-static unsigned long measurement_timestamp = 0;
-DHT_Async dht_sensor(pinDHT22, DHT_TYPE_22);
+DHTNEW mySensor(6);
 
 TFT_eSPI tft = TFT_eSPI();
 static const uint16_t screenWidth = 240;
@@ -60,17 +70,23 @@ float freqStep = 65;              // This is the delay-per-brightness step in mi
 int inputDimmer = 4;              // Input from dimmer
 int outputDimmer = 3;             // Output to Opto Triac
 
+// Usado para compensar a nao lineariedade do dimmer
 int arrayCompensacao[101] = {0,  4,  7,  11, 14, 18, 19, 20, 22, 23, 24, 25, 26, 27, 28, 29, 29, 30, 31, 32, 33, 33, 34, 34, 35, 35, 36, 36, 37, 37, 38, 39, 39, 40, 40, 41, 41, 42, 42, 43, 43, 44, 44, 45, 45, 46, 47, 47, 48, 48, 49,
                              49, 50, 50, 51, 51, 51, 52, 52, 53, 53, 54, 54, 55, 55, 56, 56, 57, 57, 58, 58, 59, 59, 60, 60, 61, 62, 62, 63, 63, 64, 65, 65, 66, 67, 68, 68, 69, 70, 70, 71, 72, 73, 75, 76, 77, 82, 86, 91, 95, 100};
 char materiais[5][7] = {" PLA ", "PETG", "Silica", "Nylon", " ABS "};
 int temperaturaMateriais[5] = {55, 65, 75, 75, 70};
 int tempoMateriais[5] = {4, 4, 8, 4, 5};
 
-int tipoMaterialAtual = 0;
-char nomeMaterialAtual[7] = "PLA";
-int temperaturaMaterialAtual = 55;
-int tempoMaterialAtual = 4;
-float tempAtual = 20, umidadeAtual = 40;
+int tipoMaterialAtual = 4;
+char nomeMaterialAtual[7] = "";
+int temperaturaMaterialAtual = 0;
+int tempoMaterialAtual = 0;
+unsigned long tempoInicial, temPassado = 1;
+char tempoRestante[5] = " :  ";
+
+volatile float tempAtual = 20, umidadeAtual = 0;
 volatile int potenciaAtual = 0;
-float tempAtual2, umidadeAtual2;
-int estado = 1;  // 0=Escolha Material, 1=Rodando
+int estado = 0;  // 0=Escolha Material, 1=Rodando
+float setpoint, output, input;
+QuickPID myPID(&input, &output, &setpoint, 10.0f, 15.0f, 0.0f, QuickPID::Action::direct);
+volatile bool alerta = false;
