@@ -51,6 +51,7 @@ extern lv_obj_t* ui_labelMaterial;
 extern lv_obj_t* uic_TelaRodando;
 extern lv_chart_series_t* ui_grafico_series_1;
 extern lv_chart_series_t* ui_grafico_series_2;
+extern lv_chart_series_t* ui_grafico_series_sp;
 
 // SCREEN: ui_TelaEncerrar
 void ui_TelaEncerrar_screen_init(void);

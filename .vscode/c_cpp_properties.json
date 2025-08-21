@@ -333,7 +333,7 @@
                 "MAIN_DEBUG=1",
                 "ARDUINO=10810",
                 "ARDUINO_ARCH_RP2040",
-                "F_CPU=250000000L",
+                "F_CPU=200000000L",
                 "BOARD_NAME=\"vccgnd_yd_rp2040\"",
                 "ARM_MATH_CM0_FAMILY",
                 "ARM_MATH_CM0_PLUS",

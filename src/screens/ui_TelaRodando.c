@@ -22,13 +22,14 @@ void ui_TelaRodando_screen_init(void) {
   lv_chart_set_axis_tick(ui_grafico, LV_CHART_AXIS_PRIMARY_X, 15, 8, 10, 2, false, 50);
   lv_chart_set_axis_tick(ui_grafico, LV_CHART_AXIS_PRIMARY_Y, 10, 5, 5, 2, true, 50);
   lv_chart_set_axis_tick(ui_grafico, LV_CHART_AXIS_SECONDARY_Y, 0, 0, 0, 0, false, 25);
+  ui_grafico_series_sp = lv_chart_add_series(ui_grafico, lv_color_hex(0xFFFFFF), LV_CHART_AXIS_PRIMARY_Y);
   ui_grafico_series_1 = lv_chart_add_series(ui_grafico, lv_color_hex(0x808080), LV_CHART_AXIS_PRIMARY_Y);
   ui_grafico_series_2 = lv_chart_add_series(ui_grafico, lv_color_hex(0xDF180C), LV_CHART_AXIS_SECONDARY_Y);
 
   lv_chart_set_update_mode(ui_grafico, LV_CHART_UPDATE_MODE_SHIFT);
   lv_chart_set_point_count(ui_grafico, 30);
-  lv_chart_set_range(ui_grafico, LV_CHART_AXIS_PRIMARY_Y, 35, 75);
-  lv_chart_set_range(ui_grafico, LV_CHART_AXIS_SECONDARY_Y, 350, 750);
+  lv_chart_set_range(ui_grafico, LV_CHART_AXIS_PRIMARY_Y, 15, 100);
+  lv_chart_set_range(ui_grafico, LV_CHART_AXIS_SECONDARY_Y, 150, 1000);
 
   lv_obj_set_style_text_color(ui_grafico, lv_color_hex(0x000000), LV_PART_TICKS | LV_STATE_DEFAULT);
   lv_obj_set_style_text_opa(ui_grafico, 255, LV_PART_TICKS | LV_STATE_DEFAULT);
@@ -62,7 +63,7 @@ void ui_TelaRodando_screen_init(void) {
   lv_obj_clear_flag(ui_Image4, LV_OBJ_FLAG_SCROLLABLE);  /// Flags
 
   ui_barraTempo = lv_bar_create(ui_panelTempo);
-  //lv_bar_set_range(ui_barraTempo, 0, 300);
+  // lv_bar_set_range(ui_barraTempo, 0, 300);
   lv_bar_set_start_value(ui_barraTempo, 0, LV_ANIM_OFF);
   lv_obj_set_width(ui_barraTempo, 227);
   lv_obj_set_height(ui_barraTempo, 37);

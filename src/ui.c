@@ -46,6 +46,7 @@ lv_obj_t* ui_labelMaterial;
 lv_obj_t* uic_TelaRodando;
 lv_chart_series_t* ui_grafico_series_1;
 lv_chart_series_t* ui_grafico_series_2;
+lv_chart_series_t* ui_grafico_series_sp;
 
 // SCREEN: ui_TelaEncerrar
 void ui_TelaEncerrar_screen_init(void);
@@ -98,7 +99,7 @@ void ui_event_bStart(lv_event_t* e) {
   lv_event_code_t event_code = lv_event_get_code(e);
 
   if (event_code == LV_EVENT_CLICKED) {
-        btnIniciarClick();
+    btnIniciarClick();
   }
 }
 
@@ -115,7 +116,7 @@ void ui_event_Button1(lv_event_t* e) {
   lv_event_code_t event_code = lv_event_get_code(e);
 
   if (event_code == LV_EVENT_CLICKED) {
-        btnVoltarTelainicialClick();
+    btnVoltarTelainicialClick();
   }
 }
 
