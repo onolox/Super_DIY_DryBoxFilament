@@ -44,6 +44,10 @@ void playStartSong();
 void clicarGrafico();
 void eventoBotaoCartao(lv_event_t *e);
 static void draw_event_cb(lv_event_t *e);
+void setPotencia(int potencia);
+bool tempAtualEhMenor();
+bool tempAtualEhMaior();
+int floatToIntX10(float num);
 
 volatile int pinBeeper = 9;
 #define SD_CS_PIN 13
@@ -76,7 +80,7 @@ int arrayCompensacao[101] = {0,  4,  7,  11, 14, 18, 19, 20, 22, 23, 24, 25, 26,
                              49, 50, 50, 51, 51, 51, 52, 52, 53, 53, 54, 54, 55, 55, 56, 56, 57, 57, 58, 58, 59, 59, 60, 60, 61, 62, 62, 63, 63, 64, 65, 65, 66, 67, 68, 68, 69, 70, 70, 71, 72, 73, 75, 76, 77, 82, 86, 91, 95, 100};
 char materiais[5][7] = {" PLA ", "PETG", "TPU", "Nylon", " ABS "};
 int temperaturaMateriais[5] = {55, 65, 50, 75, 70};
-int tempoMateriais[5] = {4, 4, 8, 4, 5};
+int tempoMateriais[5] = {4, 5, 8, 4, 5};
 
 int tipoMaterialAtual = 4;
 char nomeMaterialAtual[7] = "";
@@ -92,3 +96,6 @@ float setpoint, output, input;
 QuickPID myPID(&input, &output, &setpoint, 65.0f, 0.1f, 10.0f, QuickPID::pMode::pOnMeas, QuickPID::dMode::dOnMeas, QuickPID::iAwMode::iAwCondition, QuickPID::QuickPID::Action::direct);
 volatile bool alerta = false;
 bool inicialmente = true;
+float ultimaTemp = 0;
+u_long ultimaVezModicouTemp = 0;
+bool pidLiberado = false;
