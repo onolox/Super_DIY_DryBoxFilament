@@ -329,7 +329,6 @@
                 "ARDUINO_YD_RP2040",
                 "ARDUINO_ARCH_RP2040",
                 "USBD_MAX_POWER_MA=500",
-                "DEBUG_RP2040_PORT=Serial1",
                 "MAIN_DEBUG=1",
                 "ARDUINO=10810",
                 "ARDUINO_ARCH_RP2040",

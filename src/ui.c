@@ -88,66 +88,66 @@ lv_obj_t* ui____initial_actions0;
 
 ///////////////////// FUNCTIONS ////////////////////
 void ui_event_btnTipoFilamento(lv_event_t* e) {
-  lv_event_code_t event_code = lv_event_get_code(e);
+    lv_event_code_t event_code = lv_event_get_code(e);
 
-  if (event_code == LV_EVENT_CLICKED) {
-    btnMudarFilamentoClick(e);
-  }
+    if (event_code == LV_EVENT_CLICKED) {
+        btnFilamentChangeClick(e);
+    }
 }
 
 void ui_event_bStart(lv_event_t* e) {
-  lv_event_code_t event_code = lv_event_get_code(e);
+    lv_event_code_t event_code = lv_event_get_code(e);
 
-  if (event_code == LV_EVENT_CLICKED) {
-    btnIniciarClick();
-  }
+    if (event_code == LV_EVENT_CLICKED) {
+        btnStartClick();
+    }
 }
 
 void ui_event_grafico(lv_event_t* e) {
-  lv_event_code_t event_code = lv_event_get_code(e);
+    lv_event_code_t event_code = lv_event_get_code(e);
 
-  if (event_code == LV_EVENT_CLICKED) {
-    _ui_screen_change(&ui_TelaEncerrar, LV_SCR_LOAD_ANIM_OUT_TOP, 500, 0, &ui_TelaEncerrar_screen_init);
-    clicarGrafico();
-  }
+    if (event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_TelaEncerrar, LV_SCR_LOAD_ANIM_OUT_TOP, 500, 0, &ui_TelaEncerrar_screen_init);
+        clickChart();
+    }
 }
 
 void ui_event_Button1(lv_event_t* e) {
-  lv_event_code_t event_code = lv_event_get_code(e);
+    lv_event_code_t event_code = lv_event_get_code(e);
 
-  if (event_code == LV_EVENT_CLICKED) {
-    btnVoltarTelainicialClick();
-  }
+    if (event_code == LV_EVENT_CLICKED) {
+        btnBackToStartScreenClick();
+    }
 }
 
 void ui_event_Button2(lv_event_t* e) {
-  lv_event_code_t event_code = lv_event_get_code(e);
+    lv_event_code_t event_code = lv_event_get_code(e);
 
-  if (event_code == LV_EVENT_CLICKED) {
-    _ui_screen_change(&ui_TelaRodando, LV_SCR_LOAD_ANIM_NONE, 500, 0, &ui_TelaRodando_screen_init);
-    playButtonTone();
-  }
+    if (event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_TelaRodando, LV_SCR_LOAD_ANIM_NONE, 500, 0, &ui_TelaRodando_screen_init);
+        playButtonTone();
+    }
 }
 
 void ui_event_ButtonOverheating(lv_event_t* e) {
-  lv_event_code_t event_code = lv_event_get_code(e);
+    lv_event_code_t event_code = lv_event_get_code(e);
 
-  if (event_code == LV_EVENT_CLICKED) {
-    btnEncerrarAlertaClick(e);
-    _ui_screen_change(&ui_TelaInicial, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_TelaOverheating_screen_init);
-  }
+    if (event_code == LV_EVENT_CLICKED) {
+        btnEndAlertClick(e);
+        _ui_screen_change(&ui_TelaInicial, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_TelaOverheating_screen_init);
+    }
 }
 
 ///////////////////// SCREENS ////////////////////
 
 void ui_init(void) {
-  lv_disp_t* dispp = lv_disp_get_default();
-  lv_theme_t* theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), false, LV_FONT_DEFAULT);
-  lv_disp_set_theme(dispp, theme);
-  ui_TelaInicial_screen_init();
-  ui_TelaRodando_screen_init();
-  ui_TelaEncerrar_screen_init();
-  ui_TelaOverheating_screen_init();
-  ui____initial_actions0 = lv_obj_create(NULL);
-  lv_disp_load_scr(ui_TelaInicial);
+    lv_disp_t* dispp = lv_disp_get_default();
+    lv_theme_t* theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), false, LV_FONT_DEFAULT);
+    lv_disp_set_theme(dispp, theme);
+    ui_TelaInicial_screen_init();
+    ui_TelaRodando_screen_init();
+    ui_TelaEncerrar_screen_init();
+    ui_TelaOverheating_screen_init();
+    ui____initial_actions0 = lv_obj_create(NULL);
+    lv_disp_load_scr(ui_TelaInicial);
 }

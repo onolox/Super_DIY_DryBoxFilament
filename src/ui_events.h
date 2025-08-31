@@ -10,11 +10,11 @@
 extern "C" {
 #endif
 
-void btnMudarFilamentoClick(lv_event_t* e);
-void btnVoltarTelainicialClick();
-void btnEncerrarAlertaClick(lv_event_t* e);
-void btnIniciarClick();
-void clicarGrafico();
+void btnFilamentChangeClick(lv_event_t* e);
+void btnBackToStartScreenClick();
+void btnEndAlertClick(lv_event_t* e);
+void btnStartClick();
+void clickChart();
 void playButtonTone();
 
 #ifdef __cplusplus
