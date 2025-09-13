@@ -59,6 +59,6 @@ A parte realmente difícil que me tomou muitos meses foi em relação ao softwar
 <img src="/Images_Files/Board 1.jpg" width="400px" />
 
 
-[Projeto Fusion 360 da caixa onde fica a eletrônica para usar de base.](/Images_Files/DIY Filament Dry Box.f3d "Projeto Fusion 360 da caixa onde fica a eletrônica para usar de base.")
+📁 [Projeto Fusion 360 da caixa onde fica a eletrônica para usar de base.](Images_Files/DIY%20Filament%20Dry%20Box.f3d)
 
 # Aqui se encontra toda a base para você criar a sua caixa para secar filamentos, melhore, compartilhe.
