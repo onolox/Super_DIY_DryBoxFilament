@@ -1,11 +1,11 @@
-##### Este é um projeto de uma caixa para secagem de filamentos DIY super poderosa caseira. 
+## Este é um projeto de uma caixa para secagem de filamentos DIY super poderosa caseira. 
 
 As caixas vendidas no mercado tem um sério problema além de serem muito caras, não tem isolamento térmico, com isso há um desperdício enorme de energia.
 Além disso não é necessário um fluxo grande de ar saindo e entrando da caixa, só um pequeno furo de entrada e saída. O que é bom ter é um fluxo grande de ar circulando internamente.
 Com isso em mente resolvi fazer a minha própria caixa com coisas que eu tinha em casa.
 
 
-##### Lista de itens para a caixa:
+### Lista de itens para a caixa:
 - Caixa de papelão ( o tamanho depende do que vote quiser, no meu caso couberam 4 rolos);
 - 2 placas de isopor de 2~3cm (Forração interna e a tampa);
 - Papel aluminio;
@@ -18,7 +18,7 @@ Com isso em mente resolvi fazer a minha própria caixa com coisas que eu tinha e
 - Pasta térmica
 
 
-##### Lista:
+### Lista:
 - RP2040
 - Sensor DHT22
 - Fonte 12v, 1A
@@ -36,13 +36,29 @@ Para o Dimmer usei esse projeto: [Arduino Dimmer](https://www.instructables.com/
 
 A parte realmente difícil que me tomou muitos meses foi em relação ao software, aqui é onde está o ouro. Usei o PlatformI0 no vSCode.
 
-##### Aqui se encontra a base para você criar a sua caixa para secar filamentos, melhore, compatilhe.
-
-Fotos do projeto:
 
 
+### Fotos do projeto:
+|||
+| ------------ | ------------ |
+|<img src="/Images_Files/1.jpg" width="400px" /> |<img src="/Images_Files/2.jpg" width="400px" /> |
+|<img src="/Images_Files/3.jpg" width="400px" /> |<img src="/Images_Files/4.jpg" width="400px" /> |
+|<img src="/Images_Files/5.jpg" width="400px" /> |<img src="/Images_Files/6.jpg" width="400px" /> |
+|<img src="/Images_Files/7.jpg" width="400px" /> |<img src="/Images_Files/8.jpg" width="400px" /> |
+|<img src="/Images_Files/screen running.jpg" width="400px" /> |<img src="/Images_Files/rp2040 YD black.webp" width="400px" /> |
 
 
 
-Dica para fixar os parafusos: Faça o furo e rosqueie os parafusos, depois coloque super cola nos buracos, isso reforçará os furos:
 
+### Dica para fixar os parafusos: Faça o furo e rosqueie os parafusos, depois coloque super cola nos buracos, isso reforçará os furos:
+<img src="/Images_Files/Mounting holes.jpg" width="400px" />
+
+
+### Foto da caixa com a eletronica:
+
+<img src="/Images_Files/Board 1.jpg" width="400px" />
+
+
+[Projeto Fusion 360 da caixa onde fica a eletrônica para usar de base.](/Images_Files/DIY Filament Dry Box.f3d "Projeto Fusion 360 da caixa onde fica a eletrônica para usar de base.")
+
+# Aqui se encontra toda a base para você criar a sua caixa para secar filamentos, melhore, compartilhe.
