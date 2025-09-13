@@ -106,7 +106,7 @@ void loop() {
 
                     if (diffTemp >= tempCut) {
                         setPower(offsetTemp);  // zero
-                        offsetTemp += 10;
+                        offsetTemp += 20;
                         tempCut = tempCut - 0.03;
                         debug(" -2- ");
                         cicleLess = true;
@@ -303,7 +303,7 @@ void btnStartClick() {
         inititalTime = millis();
 
         File PIDfile = SDFS.open("PID.txt", "r");  // Set PID data
-        float parameters[3];                                 // Kp Ki Kd
+        float parameters[3];                       // Kp Ki Kd
         int counter = 0;
 
         while (PIDfile.available() && counter < 3) {
