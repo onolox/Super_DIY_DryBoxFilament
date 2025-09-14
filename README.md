@@ -36,7 +36,18 @@ The lamp must be “glued” to the heat sink with plenty of thermal paste. The 
 The box can of course be improved by adding more lamps to speed up the initial heating.
 For the dimmer, I used this project: [Arduino Dimmer](https://www.instructables.com/Arduino-controlled-light-dimmer-The-circuit/ “Arduino Dimmer”), but it can be purchased from china. However, I find it very expensive; for the price of the store, you can buy 10x in components.
 
-The really difficult part that took me many months was the software, which is where the gold is. I used PlatformI0 in VS Code.
+The really difficult part that took me many months was the software, which is where the gold is. I used PlatformI0 in VS Code. It uses a PID control. I think the code is self-explanatory and there are comments to help.
+
+#### Here are some explanations about the software:
+
+It uses PID, but for PLA it uses a custom algorithm for the first hour.
+It's important to note that you will need to adjust the PID values for your box, because of this i made it read the values kd, ki and kp from the SD-card for quick testing, one value per line. The file is PID.txt.
+
+
+
+The run data is also saved to the SD for you to analyze.
+
+The interface uses LVGL.
 
 ### Project photos:
 
