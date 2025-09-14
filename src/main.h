@@ -91,7 +91,7 @@ unsigned long inititalTime, timePast = 1;
 char timeRemainingString[5] = " :  ";
 int state = 0;  // 0=Material choide, 1=Running
 float setpoint, output, input;
-QuickPID myPID(&input, &output, &setpoint, 40.0f, 2, 0, QuickPID::pMode::pOnMeas, QuickPID::dMode::dOnMeas, QuickPID::iAwMode::iAwCondition, QuickPID::QuickPID::Action::direct);
+QuickPID myPID(&input, &output, &setpoint, 40, 2, 0, QuickPID::pMode::pOnMeas, QuickPID::dMode::dOnMeas, QuickPID::iAwMode::iAwCondition, QuickPID::QuickPID::Action::direct);
 volatile bool alert = false;
 bool initially = true;
 float lastTemp = 0;

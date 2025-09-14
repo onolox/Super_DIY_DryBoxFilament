@@ -6,49 +6,49 @@
 #include "../ui.h"
 
 void ui_TelaOverheating_screen_init(void) {
-  ui_TelaOverheating = lv_obj_create(NULL);
-  lv_obj_clear_flag(ui_TelaOverheating, LV_OBJ_FLAG_SCROLLABLE);  /// Flags
-  lv_obj_set_style_bg_color(ui_TelaOverheating, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_TelaOverheating = lv_obj_create(NULL);
+    lv_obj_clear_flag(ui_TelaOverheating, LV_OBJ_FLAG_SCROLLABLE);  /// Flags
+    lv_obj_set_style_bg_color(ui_TelaOverheating, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
 
-  ui_Label1 = lv_label_create(ui_TelaOverheating);
-  lv_obj_set_width(ui_Label1, LV_SIZE_CONTENT);   /// 1
-  lv_obj_set_height(ui_Label1, LV_SIZE_CONTENT);  /// 1
-  lv_obj_set_x(ui_Label1, 0);
-  lv_obj_set_y(ui_Label1, 10);
-  lv_obj_set_align(ui_Label1, LV_ALIGN_TOP_MID);
-  lv_obj_set_style_text_color(ui_Label1, lv_palette_main(LV_PALETTE_YELLOW), 0);
-  lv_label_set_text(ui_Label1, "Caixa");
-  lv_obj_set_style_text_font(ui_Label1, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Label1 = lv_label_create(ui_TelaOverheating);
+    lv_obj_set_width(ui_Label1, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label1, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_x(ui_Label1, 0);
+    lv_obj_set_y(ui_Label1, 10);
+    lv_obj_set_align(ui_Label1, LV_ALIGN_TOP_MID);
+    lv_obj_set_style_text_color(ui_Label1, lv_palette_main(LV_PALETTE_YELLOW), 0);
+    lv_label_set_text(ui_Label1, "Box");
+    lv_obj_set_style_text_font(ui_Label1, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-  ui_Label2 = lv_label_create(ui_TelaOverheating);
-  lv_obj_set_width(ui_Label2, LV_SIZE_CONTENT);   /// 1
-  lv_obj_set_height(ui_Label2, LV_SIZE_CONTENT);  /// 1
-  lv_obj_set_x(ui_Label2, 0);
-  lv_obj_set_y(ui_Label2, 60);
-  lv_obj_set_align(ui_Label2, LV_ALIGN_TOP_MID);
-  lv_obj_set_style_text_color(ui_Label2, lv_palette_main(LV_PALETTE_YELLOW), 0);
-  lv_label_set_text(ui_Label2, "Sobreaqueceu!");
-  lv_obj_set_style_text_font(ui_Label2, &lv_font_montserrat_28, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Label2 = lv_label_create(ui_TelaOverheating);
+    lv_obj_set_width(ui_Label2, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label2, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_x(ui_Label2, 0);
+    lv_obj_set_y(ui_Label2, 60);
+    lv_obj_set_align(ui_Label2, LV_ALIGN_TOP_MID);
+    lv_obj_set_style_text_color(ui_Label2, lv_palette_main(LV_PALETTE_YELLOW), 0);
+    lv_label_set_text(ui_Label2, "Overheated!");
+    lv_obj_set_style_text_font(ui_Label2, &lv_font_montserrat_28, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-  ui_ButtonOverheating = lv_btn_create(ui_TelaOverheating);
-  lv_obj_set_width(ui_ButtonOverheating, 200);
-  lv_obj_set_height(ui_ButtonOverheating, LV_SIZE_CONTENT);
-  lv_obj_set_x(ui_ButtonOverheating, 0);
-  lv_obj_set_y(ui_ButtonOverheating, 40);
-  lv_obj_set_align(ui_ButtonOverheating, LV_ALIGN_CENTER);
-  lv_obj_add_flag(ui_ButtonOverheating, LV_OBJ_FLAG_SCROLL_ON_FOCUS);  /// Flags
-  lv_obj_clear_flag(ui_ButtonOverheating, LV_OBJ_FLAG_SCROLLABLE);     /// Flags
-  lv_obj_set_style_bg_color(ui_ButtonOverheating, lv_color_hex(0xACAAAA), LV_PART_MAIN | LV_STATE_DEFAULT);
-  lv_obj_set_style_bg_opa(ui_ButtonOverheating, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_ButtonOverheating = lv_btn_create(ui_TelaOverheating);
+    lv_obj_set_width(ui_ButtonOverheating, 200);
+    lv_obj_set_height(ui_ButtonOverheating, LV_SIZE_CONTENT);
+    lv_obj_set_x(ui_ButtonOverheating, 0);
+    lv_obj_set_y(ui_ButtonOverheating, 40);
+    lv_obj_set_align(ui_ButtonOverheating, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_ButtonOverheating, LV_OBJ_FLAG_SCROLL_ON_FOCUS);  /// Flags
+    lv_obj_clear_flag(ui_ButtonOverheating, LV_OBJ_FLAG_SCROLLABLE);     /// Flags
+    lv_obj_set_style_bg_color(ui_ButtonOverheating, lv_color_hex(0xACAAAA), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_ButtonOverheating, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-  ui_Label3 = lv_label_create(ui_ButtonOverheating);
-  lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);   /// 1
-  lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);  /// 1
-  lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
-  lv_obj_set_style_text_color(ui_Label3, lv_color_hex(0x000000), 0);
-  lv_label_set_text(ui_Label3, "    Voltar a\n Tela Inicial");
-  lv_obj_set_style_text_font(ui_Label3, &lv_font_montserrat_28, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Label3 = lv_label_create(ui_ButtonOverheating);
+    lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
+    lv_obj_set_style_text_color(ui_Label3, lv_color_hex(0x000000), 0);
+    lv_label_set_text(ui_Label3, "    Back to\n Initial Screen");
+    lv_obj_set_style_text_font(ui_Label3, &lv_font_montserrat_28, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-  lv_obj_add_event_cb(ui_ButtonOverheating, ui_event_ButtonOverheating, LV_EVENT_ALL, NULL);
-  uic_TelaOverheating = ui_TelaOverheating;
+    lv_obj_add_event_cb(ui_ButtonOverheating, ui_event_ButtonOverheating, LV_EVENT_ALL, NULL);
+    uic_TelaOverheating = ui_TelaOverheating;
 }
