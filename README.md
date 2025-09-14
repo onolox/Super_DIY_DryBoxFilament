@@ -28,6 +28,7 @@ With that in mind, I decided to make my own box with things I had at home.
 - 2.4 ILI9341 LCD screen
 - DIY or purchased dimmer
 - Buzzer
+- SD card
 
 The box should be lined with Styrofoam and aluminum foil. For the rounded corners, I used square pieces cut with a hot wire from a bench power source. 
 For the lid, I used the leftover pieces to make the inner outline. 
