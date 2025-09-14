@@ -59,6 +59,7 @@ The interface uses LVGL.
 |<img src="/Images_Files/5.jpg" width="400px" /> |<img src="/Images_Files/6.jpg" width="400px" /> |
 |<img src="/Images_Files/7.jpg" width="400px" /> |<img src="/Images_Files/8.jpg" width="400px" /> |
 |<img src="/Images_Files/screen running.jpg" width="400px" /> |<img src="/Images_Files/rp2040 YD black.webp" width="400px" /> |
+|<img src="/Images_Files/ILI9341-TOUCH-RP2040-SPI0-wiring.png" width="400px" />||
 
 ### Tip for securing the screws: Drill the holes and tap the screw, then apply super glue to the holes to reinforce them:
 
