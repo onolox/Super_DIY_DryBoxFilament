@@ -61,7 +61,8 @@ void loop() {
     if (state == 1) {
         float diffTemp = currentTemp - currentMaterialTemperature;
 
-        if (timePast <= 0) {
+        int minutesLeft = (currentMaterialTime * 60) - ((timePast / 1000) / 60);
+         if (minutesLeft < 0) {
             btnBackToStartScreenClick();
             playEndSong();
         }
@@ -75,11 +76,11 @@ void loop() {
                 if (currentMaterialTemperature > 55) {  // PETG
                     pidFree = true;
                     setPower(65);
-                    myPID.SetOutputLimits(50, 70);
+                    myPID.SetOutputLimits(45, 70);
                 }
                 else {
                     setPower(0);
-                    myPID.SetOutputLimits(30, 60);
+                    myPID.SetOutputLimits(25, 60);
                 }
 
                 playButtonTone();
@@ -137,6 +138,7 @@ void loop() {
         verifySecurity();
         updateDataDisplay();
         logCard();
+        verifyEnd();
     }
 
 #if DEBUG == 1
@@ -449,6 +451,10 @@ void verifySecurity() {
         alert = true;
         lv_scr_load(ui_TelaOverheating);
     }*/
+}
+
+void verifyEnd(){
+    
 }
 
 bool tempNowIsLess() { return floatToIntX10(currentTemp) < floatToIntX10(lastTemp) ? true : false; }
