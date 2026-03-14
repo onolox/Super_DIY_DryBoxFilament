@@ -62,7 +62,7 @@ void loop() {
         float diffTemp = currentTemp - currentMaterialTemperature;
 
         int minutesLeft = (currentMaterialTime * 60) - ((timePast / 1000) / 60);
-         if (minutesLeft < 0) {
+        if (minutesLeft < 0) {
             btnBackToStartScreenClick();
             playEndSong();
         }
@@ -138,7 +138,6 @@ void loop() {
         verifySecurity();
         updateDataDisplay();
         logCard();
-        verifyEnd();
     }
 
 #if DEBUG == 1
@@ -451,10 +450,6 @@ void verifySecurity() {
         alert = true;
         lv_scr_load(ui_TelaOverheating);
     }*/
-}
-
-void verifyEnd(){
-    
 }
 
 bool tempNowIsLess() { return floatToIntX10(currentTemp) < floatToIntX10(lastTemp) ? true : false; }

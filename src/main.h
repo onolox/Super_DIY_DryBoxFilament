@@ -47,7 +47,6 @@ void setPower(int potencia);
 bool tempNowIsLess();
 bool tempNowIsMore();
 int floatToIntX10(float num);
-void verifyEnd();
 
 volatile int pinBeeper = 9;
 #define SD_CS_PIN 13
